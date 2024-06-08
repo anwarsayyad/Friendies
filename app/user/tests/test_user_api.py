@@ -11,7 +11,7 @@ from rest_framework import status
 
 CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
-ME_URL = reverse('user:me')
+ME_URL = reverse('user:setting')
 
 def create_user(**params):
     """Createing and returning new user"""
@@ -47,6 +47,7 @@ class PubilcUserAPITests(TestCase):
             'password': 'testpass123',
             'name': 'Test Name',
         }
+        create_user(**payload)
         res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
@@ -66,17 +67,60 @@ class PubilcUserAPITests(TestCase):
         ).exists()
         self.assertFalse(user_exists)
 
-    def test_email_case_insensitive(self):
-        """Testing for the email case sensitve"""
+    def test_create_token(self):
+        """Test for the generating token for valid credentials."""
+        user_details = {
+            'name': 'User Name',
+            'email': 'user@example.com',
+            'password': 'test_user_password_123',
+        }
+        create_user(**user_details)
+
         payload = {
-            'email': 'TEST@EXAMPLE.COM',
-            'password': 'testPass1234',
-            'name': 'Testing User'
+            'email': user_details['email'],
+            'password': user_details['password'],
         }
 
-        res = self.client.post(CREATE_USER_URL, payload)
+        res = self.client.post(TOKEN_URL, payload)
 
-        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+class PrivateUsrAPITests(TestCase):
+    """Test API require authentication"""
+    def setUp(self) -> None:
+        self.user = create_user(
+            email='user@example.com',
+            password='testpass1234',
+            name='Test Name'
+        )
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_retrive_profile(self):
+        """Test retreiving profile for loggerd in user"""
+        res = self.client.get(ME_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, {
+            'name': self.user.name,
+            'email': self.user.email,
+        })
+
+    def test_post_setting_not_allowed(self):
+        """Testing for the post request not allowed on profile setting"""
+        res = self.client.post(ME_URL, {})
+        self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_udpating_user_profile(self):
+        """Test updating the user profile for the authentication user."""
+        payload = {'name': 'New name', 'password': 'newpassword123'}
+        res = self.client.patch(ME_URL, payload)
+
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.name, payload['name'])
+        self.assertTrue(self.user.check_password(payload['password']))
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
 
 
 
