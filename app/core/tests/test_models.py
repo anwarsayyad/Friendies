@@ -39,3 +39,11 @@ class ModelTests(TestCase):
             user = get_user_model().objects.create_user(email, 'Sample1234')
             self.assertEqual(user.email, expected)
 
+    def test_create_friend_requset(self):
+        user1 = create_user()
+        user2 = create_user(email='test1@example.com', password='testpass123')
+        friends = models.friends.objects.create(to=user1,req_from=user2)
+
+        self.assertEqual(friends.to, user1)
+        self.assertEqual(friends.req_from, user2)
+        self.assertEqual(friends.status,'pending')
