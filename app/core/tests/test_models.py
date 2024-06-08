@@ -21,11 +21,13 @@ class ModelTests(TestCase):
         password = 'testpass123'
         user = get_user_model().objects.create_user(
             email=email,
-            password=password
+            password=password,
+            name='user1'
         )
 
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
+        self.assertEqual(user.name, 'user1')
 
     def test_user_mail_insensitive(self):
         """Test email is insesitive"""

@@ -60,7 +60,10 @@ class Friends(models.Model):
     stamp
     """
     to = models.ForeignKey(User, related_name='requests_to', on_delete=models.CASCADE)
-    req_from = models.ForeignKey(User, related_name='requests_recived', on_delete=models.CASCADE)
+    req_from = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='requests_from',
+        on_delete=models.CASCADE
+    )
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pending')
     timestamp = models.DateTimeField(auto_now_add=True)
 
