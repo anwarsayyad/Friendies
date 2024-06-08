@@ -14,28 +14,57 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiExample
+
 from core.models import Friends
 
-from .serialziers import FriendsSerializersReq
+from .serialziers import (
+    FriendsSerializersReq,
+    FrindsSerializerRes,
+    FreindsSerialiser,
+)
 
 
-
+@extend_schema_view(
+    send=extend_schema(
+        request=FriendsSerializersReq,
+        responses={201: FreindsSerialiser},
+        description="Sending friend request",
+    ),
+    respond=extend_schema(
+        request=FrindsSerializerRes,
+        responses={200: FreindsSerialiser},
+        description="Responding to friend request",
+        examples=[
+            OpenApiExample(
+                "Accept Friend Request",
+                value={"action": "accept"},
+            ),
+            OpenApiExample(
+                "Rejecte Friend Request",
+                value={"action": "reject"}
+            ),
+        ]
+    ),
+)
 class FriendsViewSet(
     viewsets.GenericViewSet
 ):
     """Class for the Frind API view set"""
     queryset = Friends.objects.all()
-    serializer_class = FriendsSerializersReq
+    serializer_class = FreindsSerialiser
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
     @action(detail=False, methods=['post'], url_name='send', url_path='send')
     def send(self, request):
         """Sending request to friend"""
+        self.serializer_class = FriendsSerializersReq
         req_from = request.user
         to_data = request.data.get('requests_to')
-        print(request.data)
         to = models.User.objects.get(email = to_data['email'])
+        if req_from == to:
+            return Response({'error': 'Not allowed to send self request'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
         one_min_ago = datetime.now(tz=timezone.utc) - timedelta(minutes=1)
         recent_requests = Friends.objects.filter(
@@ -50,4 +79,17 @@ class FriendsViewSet(
         if not created:
             return Response({'error': 'Friend request already sent'}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(FriendsSerializersReq(freindship).data, status=status.HTTP_201_CREATED)
+        return Response(FreindsSerialiser(freindship).data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['post'], url_path='respond', url_name='respond')
+    def respond(self, request, pk=None):
+        self.serializer_class = FrindsSerializerRes
+        friendship =self.get_object()
+        if friendship.to != request.user:
+            return Response({'error': 'Cannot respond to this request'}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = FrindsSerializerRes(data=request.data)
+        if serializer.is_valid():
+            serializer.update(friendship, serializer.validated_data)
+            return Response(FreindsSerialiser(friendship).data, status=status.HTTP_200_OK)
+        return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)

@@ -48,6 +48,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=225)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    friends = models.ManyToManyField(
+        'self',
+        through='Friends',
+        symmetrical=False,
+        blank=True
+    )
 
     objects = UserManager()
 
