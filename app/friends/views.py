@@ -51,6 +51,10 @@ from .serialziers import (
         responses={200: UserSerilaizersForFriends},
         description="Getting Friends list",
     ),
+    list_pending=extend_schema(
+        responses={200: FreindsSerialiser},
+        description="Getting all the pending request of the user"
+    )
 )
 class FriendsViewSet(
     viewsets.GenericViewSet
@@ -112,6 +116,12 @@ class FriendsViewSet(
     def list_accepted(self, request):
         user = request.user
         friends = user.friends.all().order_by('name')
-        print(UserSerilaizersForFriends(friends, many=True).data)
         return Response(UserSerilaizersForFriends(friends, many=True).data, status=status.HTTP_200_OK,)
 
+    @action(detail=False, methods=['get'], url_name='list-pending', url_path='list-pending')
+    def list_pending(self, request):
+        user = request.user
+
+        pend_request = Friends.objects.filter(to=user, status='pending')
+        print(FreindsSerialiser(pend_request, many=True).data)
+        return Response(FreindsSerialiser(pend_request, many=True).data, status=status.HTTP_200_OK)

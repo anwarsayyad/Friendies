@@ -14,6 +14,7 @@ from friends.serialziers import FriendsSerializersReq
 
 FREIENDS_SEND_URL = reverse('friends:friendship-send')
 FRIEDS_LIST = reverse('friends:friendship-list-accepted')
+FRIEND_LIST_PENDING = reverse('friends:friendship-list-pending')
 
 def create_request(to,req_from):
     req = models.Friends.objects.create(to=to, req_from=req_from)
@@ -143,4 +144,14 @@ class PrivateFriendReq(TestCase):
 
         self.client.force_authenticate(self.user1)
         res = self.client.get(FRIEDS_LIST)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_pending_request(self):
+        req1 = create_request(self.user1, self.user2)
+        req2 = create_request(self.user1, self.user3)
+        req3 = create_request(self.user1, self.user4)
+
+        self.client.force_authenticate(self.user1)
+        res = self.client.get(FRIEND_LIST_PENDING)
+
         self.assertEqual(res.status_code, status.HTTP_200_OK)
