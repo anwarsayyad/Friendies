@@ -22,6 +22,7 @@ from .serialziers import (
     FriendsSerializersReq,
     FrindsSerializerRes,
     FreindsSerialiser,
+    UserSerilaizersForFriends
 )
 
 
@@ -46,6 +47,10 @@ from .serialziers import (
             ),
         ]
     ),
+    list_accepted=extend_schema(
+        responses={200: UserSerilaizersForFriends},
+        description="Getting Friends list",
+    ),
 )
 class FriendsViewSet(
     viewsets.GenericViewSet
@@ -64,7 +69,10 @@ class FriendsViewSet(
         to_data = request.data.get('requests_to')
         to = models.User.objects.get(email = to_data['email'])
         if req_from == to:
-            return Response({'error': 'Not allowed to send self request'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            return Response(
+                {'error': 'Not allowed to send self request'},
+                status=status.HTTP_406_NOT_ACCEPTABLE
+            )
 
         one_min_ago = datetime.now(tz=timezone.utc) - timedelta(minutes=1)
         recent_requests = Friends.objects.filter(
@@ -72,12 +80,18 @@ class FriendsViewSet(
             timestamp__gte=one_min_ago,
         ).count()
         if recent_requests >= 3:
-            return Response({'error': 'Too Many requests please try agin later'}, status=status.HTTP_429_TOO_MANY_REQUESTS)
+            return Response(
+                {'error': 'Too Many requests please try agin later'},
+                status=status.HTTP_429_TOO_MANY_REQUESTS
+                )
 
         freindship, created = Friends.objects.get_or_create(req_from=req_from,to=to)
 
         if not created:
-            return Response({'error': 'Friend request already sent'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'error': 'Friend request already sent'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         return Response(FreindsSerialiser(freindship).data, status=status.HTTP_201_CREATED)
 
@@ -93,3 +107,11 @@ class FriendsViewSet(
             serializer.update(friendship, serializer.validated_data)
             return Response(FreindsSerialiser(friendship).data, status=status.HTTP_200_OK)
         return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['get'], url_name='list-accepted', url_path='list-accepted')
+    def list_accepted(self, request):
+        user = request.user
+        friends = user.friends.all().order_by('name')
+        print(UserSerilaizersForFriends(friends, many=True).data)
+        return Response(UserSerilaizersForFriends(friends, many=True).data, status=status.HTTP_200_OK,)
+

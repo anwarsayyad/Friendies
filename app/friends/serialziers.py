@@ -40,9 +40,11 @@ class FrindsSerializerRes(serializers.Serializer):
         if action == 'accept':
             instace.status = 'accepted'
             instace.save()
-            instace.to.friends.add(instace.req_from)
+            instace.req_from.friends.add(instace.to)
         elif action == 'rejected':
             instace.status = 'rejected'
             instace.save()
         return instace
+
+   
 

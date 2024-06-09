@@ -13,6 +13,7 @@ from core import models
 from friends.serialziers import FriendsSerializersReq
 
 FREIENDS_SEND_URL = reverse('friends:friendship-send')
+FRIEDS_LIST = reverse('friends:friendship-list-accepted')
 
 def create_request(to,req_from):
     req = models.Friends.objects.create(to=to, req_from=req_from)
@@ -97,8 +98,8 @@ class PrivateFriendReq(TestCase):
 
         res = self.client.post(url, data, format='json')
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        frnd = models.User.objects.get(id=self.user2.id)
-        self.assertEqual(frnd.friends.get(id=self.user1.id).name, self.user1.name)
+        frnd = models.User.objects.get(id=self.user1.id)
+        self.assertEqual(frnd.friends.get(id=self.user2.id).name, self.user2.name)
 
 
 
@@ -110,3 +111,36 @@ class PrivateFriendReq(TestCase):
         res = self.client.post(FREIENDS_SEND_URL, payload, format='json')
         self.assertEqual(res.status_code, status.HTTP_406_NOT_ACCEPTABLE)
 
+    def test_friend_list(self):
+        """Test to check friends list of the user After request is accepted"""
+        req1 = create_request(self.user2, self.user1)
+        req2 = create_request(self.user3, self.user1)
+        req3 = create_request(self.user4, self.user1)
+
+        count = models.User.objects.get(id=self.user1.id).friends.count()
+        self.assertEqual(count, 0)
+        data = {
+            'action':'accept'
+        }
+        users = {
+            req1: self.user2,
+            req2: self.user3,
+            req3: self.user4,
+        }
+        for req,user in users.items():
+            self.client.force_authenticate(user)
+            url = get_respond_url(pk=req.id)
+            res = self.client.post(url, data, format='json')
+            exists = models.User.objects.get(id=self.user1.id).friends.filter(
+                id=user.id
+            ).exists()
+            self.assertTrue(exists)
+            self.assertEqual(res.status_code, status.HTTP_200_OK)
+            self.client.logout()
+
+        count = models.User.objects.get(id=self.user1.id).friends.count()
+        self.assertEqual(count, 3)
+
+        self.client.force_authenticate(self.user1)
+        res = self.client.get(FRIEDS_LIST)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
