@@ -1,7 +1,7 @@
 """
 Serializer for the User API
 """
-from django.contrib.auth import(
+from django.contrib.auth import (
     get_user_model,
     authenticate,
 )
@@ -9,6 +9,7 @@ from django.contrib.auth import(
 from django.utils.translation import gettext as _
 
 from rest_framework import serializers
+
 
 class UserSerializers(serializers.ModelSerializer):
     """Serialzier for the user object"""
@@ -38,7 +39,7 @@ class AuthTokenSerialzier(serializers.Serializer):
     """Serializer for the token to auth"""
     email = serializers.EmailField()
     password = serializers.CharField(
-        style={'input_type':'password'},
+        style={'input_type': 'password'},
         trim_whitespace=False
     )
 

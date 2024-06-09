@@ -3,7 +3,6 @@ from datetime import timezone, timedelta, datetime
 
 from rest_framework import (
     viewsets,
-    mixins,
     status
 )
 
@@ -76,7 +75,7 @@ class FriendsViewSet(
         self.serializer_class = FriendsSerializersReq
         req_from = request.user
         to_data = request.data.get('requests_to')
-        to = models.User.objects.get(email = to_data['email'])
+        to = models.User.objects.get(email=to_data['email'])
         if req_from == to:
             return Response(
                 {'error': 'Not allowed to send self request'},
@@ -94,7 +93,10 @@ class FriendsViewSet(
                 status=status.HTTP_429_TOO_MANY_REQUESTS
                 )
 
-        freindship, created = Friends.objects.get_or_create(req_from=req_from,to=to)
+        freindship, created = Friends.objects.get_or_create(
+            req_from=req_from,
+            to=to
+        )
 
         if not created:
             return Response(
@@ -102,36 +104,70 @@ class FriendsViewSet(
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        return Response(FreindsSerialiser(freindship).data, status=status.HTTP_201_CREATED)
+        return Response(
+            FreindsSerialiser(freindship).data,
+            status=status.HTTP_201_CREATED
+        )
 
-    @action(detail=True, methods=['post'], url_path='respond', url_name='respond')
+    @action(
+        detail=True,
+        methods=['post'],
+        url_path='respond',
+        url_name='respond'
+    )
     def respond(self, request, pk=None):
         self.serializer_class = FrindsSerializerRes
-        friendship =self.get_object()
+        friendship = self.get_object()
         if friendship.to != request.user:
-            return Response({'error': 'Cannot respond to this request'}, status=status.HTTP_403_FORBIDDEN)
+            return Response(
+                {'error': 'Cannot respond to this request'},
+                status=status.HTTP_403_FORBIDDEN
+            )
 
         serializer = FrindsSerializerRes(data=request.data)
         if serializer.is_valid():
             serializer.update(friendship, serializer.validated_data)
-            return Response(FreindsSerialiser(friendship).data, status=status.HTTP_200_OK)
-        return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                FreindsSerialiser(friendship).data,
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {'error': 'Bad request'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-    @action(detail=False, methods=['get'], url_name='list-accepted', url_path='list-accepted')
+    @action(
+        detail=False,
+        methods=['get'],
+        url_name='list-accepted',
+        url_path='list-accepted'
+    )
     def list_accepted(self, request):
         user = request.user
         friends = user.friends.all().order_by('name')
-        return Response(UserSerilaizersForFriends(friends, many=True).data, status=status.HTTP_200_OK,)
+        return Response(
+            UserSerilaizersForFriends(friends, many=True).data,
+            status=status.HTTP_200_OK,
+        )
 
-    @action(detail=False, methods=['get'], url_name='list-pending', url_path='list-pending')
+    @action(
+        detail=False, methods=['get'],
+        url_name='list-pending',
+        url_path='list-pending'
+    )
     def list_pending(self, request):
         user = request.user
 
         pend_request = Friends.objects.filter(to=user, status='pending')
-        return Response(FreindsSerialiser(pend_request, many=True).data, status=status.HTTP_200_OK)
+        return Response(
+            FreindsSerialiser(pend_request, many=True).data,
+            status=status.HTTP_200_OK
+        )
+
 
 class UserPagation(PageNumberPagination):
     page_size = 10
+
 
 @extend_schema(
     parameters=[
@@ -150,7 +186,7 @@ class UserSerachViewSet(viewsets.ReadOnlyModelViewSet):
     authentication_classes = [TokenAuthentication]
 
     def get_queryset(self):
-        keyword = self.request.query_params.get('search','')
+        keyword = self.request.query_params.get('search', '')
         print(keyword)
         return models.User.objects.filter(
             Q(email__iexact=keyword) |

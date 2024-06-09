@@ -2,7 +2,8 @@
 Here will be all the models of our project will be present
 """
 
-from django.db import  models
+
+from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -17,6 +18,7 @@ STATUS_CHOICES = {
     'accepted': 'accepted',
     'rejected': 'rejected',
 }
+
 
 class UserManager(BaseUserManager):
     """Manging Users"""
@@ -59,20 +61,29 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+
 class Friends(models.Model):
     """
     Model for the Friends that will be
     Having the request sent and recived with status and time
     stamp
     """
-    to = models.ForeignKey(User, related_name='requests_to', on_delete=models.CASCADE)
-    req_from = models.ForeignKey(settings.AUTH_USER_MODEL,
+    to = models.ForeignKey(
+        User,
+        related_name='requests_to',
+        on_delete=models.CASCADE
+    )
+    req_from = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         related_name='requests_from',
         on_delete=models.CASCADE
     )
-    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(
+        max_length=255,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('to', 'req_from')
-

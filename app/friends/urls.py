@@ -5,7 +5,11 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'friendship', views.FriendsViewSet, basename='friendship')
-router.register(r'users/serach', views.UserSerachViewSet, basename='search-user')
+router.register(
+    r'users/serach',
+    views.UserSerachViewSet,
+    basename='search-user'
+)
 
 app_name = 'friends'
 

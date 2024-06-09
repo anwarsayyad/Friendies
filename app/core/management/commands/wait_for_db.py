@@ -9,6 +9,7 @@ from django.db.utils import OperationalError
 
 from psycopg2 import OperationalError as Psycog2Operror
 
+
 class Command(BaseCommand):
     """
     Django command to wait for DB
@@ -29,4 +30,3 @@ class Command(BaseCommand):
                 self.stdout.write('database unavailable, waiting 1 second ..')
                 time.sleep(1)
         self.stdout.write(self.style.SUCCESS('Database available!'))
-

@@ -13,6 +13,7 @@ CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:setting')
 
+
 def create_user(**params):
     """Createing and returning new user"""
     return get_user_model().objects.create_user(**params)
@@ -38,7 +39,6 @@ class PubilcUserAPITests(TestCase):
         user = get_user_model().objects.get(email=payload['email'])
         self.assertTrue(user.check_password(payload['password']))
         self.assertNotIn('password', res.data)
-
 
     def test_user_with_existing_error(self):
         """Test error returned if userwith email exists"""
@@ -86,6 +86,7 @@ class PubilcUserAPITests(TestCase):
         self.assertIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
+
 class PrivateUsrAPITests(TestCase):
     """Test API require authentication"""
     def setUp(self) -> None:
@@ -121,7 +122,3 @@ class PrivateUsrAPITests(TestCase):
         self.assertEqual(self.user.name, payload['name'])
         self.assertTrue(self.user.check_password(payload['password']))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-
-
-
-

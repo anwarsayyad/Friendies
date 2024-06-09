@@ -14,14 +14,16 @@ class UserSerilaizersForFriends(UserSerializers):
     class Meta(UserSerializers.Meta):
         fields = ['name', 'email']
 
+
 class FreindsSerialiser(serializers.ModelSerializer):
     to = UserSerializers(read_only=True)
     req_from = UserSerializers(read_only=True)
 
     class Meta:
         model = Friends
-        fields = ['id','to', 'req_from', 'status', 'timestamp']
+        fields = ['id', 'to', 'req_from', 'status', 'timestamp']
         read_only_fields = ['id']
+
 
 class FriendsSerializersReq(serializers.ModelSerializer):
     requests_to = UserSerilaizersForFriends(many=False, required=True)
@@ -31,8 +33,14 @@ class FriendsSerializersReq(serializers.ModelSerializer):
         fields = ['id', 'requests_to',]
         read_only_fields = ['id']
 
+
 class FrindsSerializerRes(serializers.Serializer):
-    action = serializers.ChoiceField(choices=[('accept', 'accept'), ('rejected', 'rejected')])
+    action = serializers.ChoiceField(
+        choices=[
+            ('accept', 'accept'),
+            ('rejected', 'rejected')
+        ]
+    )
 
     def update(self, instace, validated_data):
         action = validated_data.get('action')
@@ -40,10 +48,8 @@ class FrindsSerializerRes(serializers.Serializer):
             instace.status = 'accepted'
             instace.save()
             instace.req_from.friends.add(instace.to)
+
         elif action == 'rejected':
             instace.status = 'rejected'
             instace.save()
         return instace
-
-
-

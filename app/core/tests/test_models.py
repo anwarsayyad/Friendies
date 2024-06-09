@@ -1,16 +1,17 @@
 """
 Test for models
 """
-from unittest.mock import patch
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
 from core import models
 
+
 def create_user(email='user@example.com', password='testPass1234'):
     """create and return new user"""
     return get_user_model().objects.create_user(email, password)
+
 
 class ModelTests(TestCase):
     """Test Model"""
@@ -44,8 +45,8 @@ class ModelTests(TestCase):
     def test_create_friend_requset(self):
         user1 = create_user()
         user2 = create_user(email='test1@example.com', password='testpass123')
-        friends = models.Friends.objects.create(to=user1,req_from=user2)
+        friends = models.Friends.objects.create(to=user1, req_from=user2)
 
         self.assertEqual(friends.to, user1)
         self.assertEqual(friends.req_from, user2)
-        self.assertEqual(friends.status,'pending')
+        self.assertEqual(friends.status, 'pending')
