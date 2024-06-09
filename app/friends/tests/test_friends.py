@@ -15,6 +15,7 @@ from friends.serialziers import FriendsSerializersReq
 FREIENDS_SEND_URL = reverse('friends:friendship-send')
 FRIEDS_LIST = reverse('friends:friendship-list-accepted')
 FRIEND_LIST_PENDING = reverse('friends:friendship-list-pending')
+USER_SERACH = reverse('friends:search-user-list')
 
 def create_request(to,req_from):
     req = models.Friends.objects.create(to=to, req_from=req_from)
@@ -155,3 +156,17 @@ class PrivateFriendReq(TestCase):
         res = self.client.get(FRIEND_LIST_PENDING)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_user_search(self):
+        self.client.force_authenticate(self.user1)
+
+        res = self.client.get(USER_SERACH, {'search':'us'})
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data['results']),5)
+
+    def test_email_search(self):
+        self.client.force_authenticate(self.user1)
+
+        res = self.client.get(USER_SERACH, {'search':'user5@exm.com'})
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['results'][0]['name'], 'user5')

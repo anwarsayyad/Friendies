@@ -36,7 +36,6 @@ class FrindsSerializerRes(serializers.Serializer):
 
     def update(self, instace, validated_data):
         action = validated_data.get('action')
-        print(validated_data)
         if action == 'accept':
             instace.status = 'accepted'
             instace.save()
@@ -46,5 +45,5 @@ class FrindsSerializerRes(serializers.Serializer):
             instace.save()
         return instace
 
-   
+
 

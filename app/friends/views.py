@@ -8,13 +8,18 @@ from rest_framework import (
 )
 
 from core import models
-
+from django.db.models import Q
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
-from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiExample
+from rest_framework.pagination import PageNumberPagination
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+    OpenApiExample,
+    OpenApiParameter
+)
 
 from core.models import Friends
 
@@ -22,7 +27,7 @@ from .serialziers import (
     FriendsSerializersReq,
     FrindsSerializerRes,
     FreindsSerialiser,
-    UserSerilaizersForFriends
+    UserSerilaizersForFriends,
 )
 
 
@@ -123,5 +128,31 @@ class FriendsViewSet(
         user = request.user
 
         pend_request = Friends.objects.filter(to=user, status='pending')
-        print(FreindsSerialiser(pend_request, many=True).data)
         return Response(FreindsSerialiser(pend_request, many=True).data, status=status.HTTP_200_OK)
+
+class UserPagation(PageNumberPagination):
+    page_size = 10
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name='search',
+            description='serarch keyword',
+            required='False',
+            type=str
+        )
+    ]
+)
+class UserSerachViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserSerilaizersForFriends
+    pagination_class = UserPagation
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_queryset(self):
+        keyword = self.request.query_params.get('search','')
+        print(keyword)
+        return models.User.objects.filter(
+            Q(email__iexact=keyword) |
+            Q(name__icontains=keyword)
+        ).distinct().order_by('name')
