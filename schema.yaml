@@ -1,0 +1,640 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/friends/friendship/{id}/respond/:
+    post:
+      operationId: friends_friendship_respond_create
+      description: Responding to friend request
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this friends.
+        required: true
+      tags:
+      - friends
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FrindsSerializerResRequest'
+            examples:
+              AcceptFriendRequest:
+                value:
+                  action: accept
+                summary: Accept Friend Request
+              RejecteFriendRequest:
+                value:
+                  action: reject
+                summary: Rejecte Friend Request
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FrindsSerializerResRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FrindsSerializerResRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreindsSerialiser'
+              examples:
+                AcceptFriendRequest:
+                  value:
+                    action: accept
+                  summary: Accept Friend Request
+                RejecteFriendRequest:
+                  value:
+                    action: reject
+                  summary: Rejecte Friend Request
+          description: ''
+  /api/friends/friendship/list-accepted/:
+    get:
+      operationId: friends_friendship_list_accepted_retrieve
+      description: Getting Friends list
+      tags:
+      - friends
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizersForFriends'
+          description: ''
+  /api/friends/friendship/list-pending/:
+    get:
+      operationId: friends_friendship_list_pending_retrieve
+      description: Getting all the pending request of the user
+      tags:
+      - friends
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreindsSerialiser'
+          description: ''
+  /api/friends/friendship/send/:
+    post:
+      operationId: friends_friendship_send_create
+      description: Sending friend request
+      tags:
+      - friends
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendsSerializersReqRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FriendsSerializersReqRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FriendsSerializersReqRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreindsSerialiser'
+          description: ''
+  /api/friends/users/serach/:
+    get:
+      operationId: friends_users_serach_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: serarch keyword
+        required: true
+      tags:
+      - friends
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserSerilaizersForFriendsList'
+          description: ''
+  /api/friends/users/serach/{id}/:
+    get:
+      operationId: friends_users_serach_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: serarch keyword
+        required: true
+      tags:
+      - friends
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizersForFriends'
+          description: ''
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/user/create/:
+    post:
+      operationId: user_create_create
+      description: API view for creating new User in the System
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerializers'
+          description: ''
+  /api/user/profile-settings/:
+    get:
+      operationId: user_profile_settings_retrieve
+      tags:
+      - user
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerializers'
+          description: ''
+    put:
+      operationId: user_profile_settings_update
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserSerializersRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerializers'
+          description: ''
+    patch:
+      operationId: user_profile_settings_partial_update
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerializersRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerializersRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerializersRequest'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerializers'
+          description: ''
+  /api/user/token/:
+    post:
+      operationId: user_token_create
+      description: Create a new auth token for user.
+      tags:
+      - user
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthTokenSerialzierRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthTokenSerialzierRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthTokenSerialzierRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenSerialzier'
+          description: ''
+components:
+  schemas:
+    ActionEnum:
+      enum:
+      - accept
+      - rejected
+      type: string
+      description: |-
+        * `accept` - accept
+        * `rejected` - rejected
+    AuthTokenSerialzier:
+      type: object
+      description: Serializer for the token to auth
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - email
+      - password
+    AuthTokenSerialzierRequest:
+      type: object
+      description: Serializer for the token to auth
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+      required:
+      - email
+      - password
+    FreindsSerialiser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        to:
+          allOf:
+          - $ref: '#/components/schemas/UserSerializers'
+          readOnly: true
+        req_from:
+          allOf:
+          - $ref: '#/components/schemas/UserSerializers'
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - id
+      - req_from
+      - timestamp
+      - to
+    FriendsSerializersReqRequest:
+      type: object
+      properties:
+        requests_to:
+          $ref: '#/components/schemas/UserSerilaizersForFriendsRequest'
+      required:
+      - requests_to
+    FrindsSerializerResRequest:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+      required:
+      - action
+    PaginatedUserSerilaizersForFriendsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSerilaizersForFriends'
+    PatchedUserSerializersRequest:
+      type: object
+      description: Serialzier for the user object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 225
+        password:
+          type: string
+          writeOnly: true
+          minLength: 5
+          maxLength: 128
+        name:
+          type: string
+          minLength: 1
+          maxLength: 225
+    StatusEnum:
+      enum:
+      - pending
+      - accepted
+      - rejected
+      type: string
+      description: |-
+        * `pending` - pending
+        * `accepted` - accepted
+        * `rejected` - rejected
+    UserSerializers:
+      type: object
+      description: Serialzier for the user object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 225
+        name:
+          type: string
+          maxLength: 225
+      required:
+      - email
+      - name
+    UserSerializersRequest:
+      type: object
+      description: Serialzier for the user object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 225
+        password:
+          type: string
+          writeOnly: true
+          minLength: 5
+          maxLength: 128
+        name:
+          type: string
+          minLength: 1
+          maxLength: 225
+      required:
+      - email
+      - name
+      - password
+    UserSerilaizersForFriends:
+      type: object
+      description: Seriaizers for Friends API
+      properties:
+        name:
+          type: string
+          maxLength: 225
+        email:
+          type: string
+          format: email
+          maxLength: 225
+      required:
+      - email
+      - name
+    UserSerilaizersForFriendsRequest:
+      type: object
+      description: Seriaizers for Friends API
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 225
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 225
+      required:
+      - email
+      - name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

@@ -1,0 +1,2233 @@
+{
+	"info": {
+		"_postman_id": "56265c34-7243-40e3-a39b-9df7922e7cfd",
+		"name": "Imported from OpenAPI",
+		"description": "Step1: user/create API to create new suer\n\nstep2: token/user-token-create for getting token for the user\n\nI have created the user in the collection\n\nand token is\n\nStartFragment{    \"token\": \"00920dd96e6289d5a8b47287d7d0302658b06c9a\"}EndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33728742"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "friends",
+					"item": [
+						{
+							"name": "friendship",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "respond",
+											"item": [
+												{
+													"name": "friends friendship respond create",
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "username",
+																	"value": "post2@test.com",
+																	"type": "string"
+																},
+																{
+																	"key": "password",
+																	"value": "Pass1234",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/x-www-form-urlencoded"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "urlencoded",
+															"urlencoded": [
+																{
+																	"key": "action",
+																	"value": "accept",
+																	"description": "(Required) * `accept` - accept\n* `rejected` - rejected"
+																}
+															]
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/friendship/:id/respond/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"friendship",
+																":id",
+																"respond",
+																""
+															],
+															"variable": [
+																{
+																	"key": "id",
+																	"value": "2",
+																	"description": "(Required) A unique integer value identifying this friends."
+																}
+															]
+														},
+														"description": "Responding to friend request"
+													},
+													"response": [
+														{
+															"name": "Untitled Response",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/x-www-form-urlencoded"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Authorization",
+																		"value": "<API Key>",
+																		"description": "Added as a part of security scheme: apikey"
+																	}
+																],
+																"body": {
+																	"mode": "urlencoded",
+																	"urlencoded": [
+																		{
+																			"key": "action",
+																			"value": "rejected",
+																			"description": "(Required) * `accept` - accept\n* `rejected` - rejected"
+																		}
+																	]
+																},
+																"url": {
+																	"raw": "//api/friends/friendship/:id/respond/",
+																	"path": [
+																		"",
+																		"api",
+																		"friends",
+																		"friendship",
+																		":id",
+																		"respond",
+																		""
+																	],
+																	"variable": [
+																		{
+																			"key": "id"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"id\": \"<integer>\",\n  \"req_from\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"timestamp\": \"<dateTime>\",\n  \"to\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"rejected\"\n}"
+														},
+														{
+															"name": "friends friendship respond create",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/x-www-form-urlencoded"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	}
+																],
+																"body": {
+																	"mode": "urlencoded",
+																	"urlencoded": [
+																		{
+																			"key": "action",
+																			"value": "accept",
+																			"description": "(Required) * `accept` - accept\n* `rejected` - rejected"
+																		}
+																	]
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/api/friends/friendship/:id/respond/",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"friends",
+																		"friendship",
+																		":id",
+																		"respond",
+																		""
+																	],
+																	"variable": [
+																		{
+																			"key": "id",
+																			"value": "2",
+																			"description": "(Required) A unique integer value identifying this friends."
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Date",
+																	"value": "Sun, 09 Jun 2024 14:29:45 GMT"
+																},
+																{
+																	"key": "Server",
+																	"value": "WSGIServer/0.2 CPython/3.10.14"
+																},
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																},
+																{
+																	"key": "Vary",
+																	"value": "Accept, Cookie"
+																},
+																{
+																	"key": "Allow",
+																	"value": "POST, OPTIONS"
+																},
+																{
+																	"key": "X-Frame-Options",
+																	"value": "DENY"
+																},
+																{
+																	"key": "Content-Length",
+																	"value": "169"
+																},
+																{
+																	"key": "X-Content-Type-Options",
+																	"value": "nosniff"
+																},
+																{
+																	"key": "Referrer-Policy",
+																	"value": "same-origin"
+																},
+																{
+																	"key": "Cross-Origin-Opener-Policy",
+																	"value": "same-origin"
+																}
+															],
+															"cookie": [],
+															"body": "{\n    \"id\": 2,\n    \"to\": {\n        \"email\": \"post2@test.com\",\n        \"name\": \"Post2\"\n    },\n    \"req_from\": {\n        \"email\": \"post@test.com\",\n        \"name\": \"Post1\"\n    },\n    \"status\": \"accepted\",\n    \"timestamp\": \"2024-06-09T14:02:56.950642Z\"\n}"
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "list-accepted",
+									"item": [
+										{
+											"name": "friends friendship list accepted retrieve",
+											"request": {
+												"auth": {
+													"type": "apikey",
+													"apikey": [
+														{
+															"key": "key",
+															"value": "Authorization",
+															"type": "string"
+														},
+														{
+															"key": "value",
+															"value": "{{apiKey}}",
+															"type": "string"
+														},
+														{
+															"key": "in",
+															"value": "header",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/friendship/list-accepted/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														"friendship",
+														"list-accepted",
+														""
+													]
+												},
+												"description": "Getting Friends list"
+											},
+											"response": [
+												{
+													"name": "Untitled Response",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "//api/friends/friendship/list-accepted/",
+															"path": [
+																"",
+																"api",
+																"friends",
+																"friendship",
+																"list-accepted",
+																""
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+												},
+												{
+													"name": "friends friendship list accepted retrieve",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/friendship/list-accepted/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"friendship",
+																"list-accepted",
+																""
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 13:44:25 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "GET, HEAD, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "2"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "[]"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "list-pending",
+									"item": [
+										{
+											"name": "friends friendship list pending retrieve",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "Pass1234",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "post@test.com",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/friendship/list-pending/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														"friendship",
+														"list-pending",
+														""
+													]
+												},
+												"description": "Getting all the pending request of the user"
+											},
+											"response": [
+												{
+													"name": "Untitled Response",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "//api/friends/friendship/list-pending/",
+															"path": [
+																"",
+																"api",
+																"friends",
+																"friendship",
+																"list-pending",
+																""
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"id\": \"<integer>\",\n  \"req_from\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"timestamp\": \"<dateTime>\",\n  \"to\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"rejected\"\n}"
+												},
+												{
+													"name": "friends friendship list pending retrieve",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/friendship/list-pending/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"friendship",
+																"list-pending",
+																""
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 14:26:39 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "GET, HEAD, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "170"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "[\n    {\n        \"id\": 2,\n        \"to\": {\n            \"email\": \"post2@test.com\",\n            \"name\": \"Post2\"\n        },\n        \"req_from\": {\n            \"email\": \"post@test.com\",\n            \"name\": \"Post1\"\n        },\n        \"status\": \"pending\",\n        \"timestamp\": \"2024-06-09T14:02:56.950642Z\"\n    }\n]"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "send",
+									"item": [
+										{
+											"name": "friends friendship send create",
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {}
+											},
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "Pass1234",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "post@test.com",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"requests_to\": {\r\n    \"name\": \"post2\",\r\n    \"email\": \"post2@test.com\"\r\n  }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/friendship/send/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														"friendship",
+														"send",
+														""
+													]
+												},
+												"description": "Sending friend request"
+											},
+											"response": [
+												{
+													"name": "Untitled Response",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/x-www-form-urlencoded"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"body": {
+															"mode": "urlencoded",
+															"urlencoded": [
+																{
+																	"key": "email",
+																	"value": "<email>",
+																	"description": "(Required) Seriaizers for Friends API"
+																},
+																{
+																	"key": "name",
+																	"value": "<string>",
+																	"description": "(Required) Seriaizers for Friends API"
+																}
+															]
+														},
+														"url": {
+															"raw": "//api/friends/friendship/send/",
+															"path": [
+																"",
+																"api",
+																"friends",
+																"friendship",
+																"send",
+																""
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"id\": \"<integer>\",\n  \"req_from\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"timestamp\": \"<dateTime>\",\n  \"to\": {\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"rejected\"\n}"
+												},
+												{
+													"name": "friends friendship send create",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/x-www-form-urlencoded",
+																"disabled": true
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"requests_to\": {\r\n        \"name\": \"post3\",\r\n        \"email\": \"post3@test.com\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/friendship/send/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"friendship",
+																"send",
+																""
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 14:24:01 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "POST, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "168"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"id\": 3,\n    \"to\": {\n        \"email\": \"post3@test.com\",\n        \"name\": \"Post3\"\n    },\n    \"req_from\": {\n        \"email\": \"post@test.com\",\n        \"name\": \"Post1\"\n    },\n    \"status\": \"pending\",\n    \"timestamp\": \"2024-06-09T14:24:01.108829Z\"\n}"
+												},
+												{
+													"name": "friends friendship send create",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/x-www-form-urlencoded",
+																"disabled": true
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"requests_to\": {\r\n        \"name\": \"post3\",\r\n        \"email\": \"post3@test.com\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/friendship/send/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"friendship",
+																"send",
+																""
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 14:24:01 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "POST, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "168"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"id\": 3,\n    \"to\": {\n        \"email\": \"post3@test.com\",\n        \"name\": \"Post3\"\n    },\n    \"req_from\": {\n        \"email\": \"post@test.com\",\n        \"name\": \"Post1\"\n    },\n    \"status\": \"pending\",\n    \"timestamp\": \"2024-06-09T14:24:01.108829Z\"\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "serach",
+									"item": [
+										{
+											"name": "{id}",
+											"item": [
+												{
+													"name": "friends users serach retrieve",
+													"request": {
+														"auth": {
+															"type": "apikey",
+															"apikey": [
+																{
+																	"key": "key",
+																	"value": "Authorization",
+																	"type": "string"
+																},
+																{
+																	"key": "value",
+																	"value": "{{apiKey}}",
+																	"type": "string"
+																},
+																{
+																	"key": "in",
+																	"value": "header",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/users/serach/:id/?search=<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"users",
+																"serach",
+																":id",
+																""
+															],
+															"query": [
+																{
+																	"key": "search",
+																	"value": "<string>",
+																	"description": "(Required) serarch keyword"
+																}
+															],
+															"variable": [
+																{
+																	"key": "id",
+																	"value": "<integer>",
+																	"description": "(Required) A unique integer value identifying this user."
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "Untitled Response",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Authorization",
+																		"value": "<API Key>",
+																		"description": "Added as a part of security scheme: apikey"
+																	}
+																],
+																"url": {
+																	"raw": "//api/friends/users/serach/:id/?search=<string>",
+																	"path": [
+																		"",
+																		"api",
+																		"friends",
+																		"users",
+																		"serach",
+																		":id",
+																		""
+																	],
+																	"query": [
+																		{
+																			"key": "search",
+																			"value": "<string>",
+																			"description": "(Required) serarch keyword"
+																		}
+																	],
+																	"variable": [
+																		{
+																			"key": "id"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "friends users serach list",
+											"request": {
+												"auth": {
+													"type": "apikey",
+													"apikey": [
+														{
+															"key": "key",
+															"value": "Authorization",
+															"type": "string"
+														},
+														{
+															"key": "value",
+															"value": "{{apiKey}}",
+															"type": "string"
+														},
+														{
+															"key": "in",
+															"value": "header",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/users/serach/?page=<integer>&search=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														"users",
+														"serach",
+														""
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "<integer>",
+															"description": "A page number within the paginated result set."
+														},
+														{
+															"key": "search",
+															"value": "<string>",
+															"description": "(Required) serarch keyword"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "Untitled Response",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "//api/friends/users/serach/?page=<integer>&search=<string>",
+															"path": [
+																"",
+																"api",
+																"friends",
+																"users",
+																"serach",
+																""
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>",
+																	"description": "A page number within the paginated result set."
+																},
+																{
+																	"key": "search",
+																	"value": "<string>",
+																	"description": "(Required) serarch keyword"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\",\n  \"results\": [\n    {\n      \"email\": \"<email>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}"
+												},
+												{
+													"name": "friends users serach list",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/users/serach/?search=po",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"users",
+																"serach",
+																""
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "10",
+																	"description": "A page number within the paginated result set.",
+																	"disabled": true
+																},
+																{
+																	"key": "search",
+																	"value": "po",
+																	"description": "(Required) serarch keyword"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 14:32:20 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "GET, HEAD, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "260"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"count\": 5,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"Post1\",\n            \"email\": \"post@test.com\"\n        },\n        {\n            \"name\": \"Post2\",\n            \"email\": \"post2@test.com\"\n        },\n        {\n            \"name\": \"Post3\",\n            \"email\": \"post3@test.com\"\n        },\n        {\n            \"name\": \"Post4\",\n            \"email\": \"post4@test.com\"\n        },\n        {\n            \"name\": \"Post5\",\n            \"email\": \"post5@test.com\"\n        }\n    ]\n}"
+												},
+												{
+													"name": "friends users serach list",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/friends/users/serach/?search=post@test.com",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"friends",
+																"users",
+																"serach",
+																""
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "10",
+																	"description": "A page number within the paginated result set.",
+																	"disabled": true
+																},
+																{
+																	"key": "search",
+																	"value": "post@test.com",
+																	"description": "(Required) serarch keyword"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Sun, 09 Jun 2024 14:33:28 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "WSGIServer/0.2 CPython/3.10.14"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Vary",
+															"value": "Accept, Cookie"
+														},
+														{
+															"key": "Allow",
+															"value": "GET, HEAD, OPTIONS"
+														},
+														{
+															"key": "X-Frame-Options",
+															"value": "DENY"
+														},
+														{
+															"key": "Content-Length",
+															"value": "92"
+														},
+														{
+															"key": "X-Content-Type-Options",
+															"value": "nosniff"
+														},
+														{
+															"key": "Referrer-Policy",
+															"value": "same-origin"
+														},
+														{
+															"key": "Cross-Origin-Opener-Policy",
+															"value": "same-origin"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"Post1\",\n            \"email\": \"post@test.com\"\n        }\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "schema",
+					"item": [
+						{
+							"name": "schema retrieve",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "sessionid",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.oai.openapi"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/schema/?format=json&lang=pa",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"schema",
+										""
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										},
+										{
+											"key": "lang",
+											"value": "pa"
+										}
+									]
+								},
+								"description": "OpenApi3 schema for this API. Format can be selected via content negotiation.\n\n- YAML: application/vnd.oai.openapi\n- JSON: application/vnd.oai.openapi+json"
+							},
+							"response": [
+								{
+									"name": "Untitled Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.oai.openapi"
+											},
+											{
+												"key": "sessionid",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "//api/schema/?format=json&lang=pa",
+											"path": [
+												"",
+												"api",
+												"schema",
+												""
+											],
+											"query": [
+												{
+													"key": "format",
+													"value": "json"
+												},
+												{
+													"key": "lang",
+													"value": "pa"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"nisi_8f0\": {},\n  \"fugiatc62\": {}\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "create",
+							"item": [
+								{
+									"name": "user create create",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "Post1",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "Pass1234",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "post@test.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user/create/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"create",
+												""
+											]
+										},
+										"description": "API view for creating new User in the System"
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "sessionid",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "email",
+															"value": "<email>",
+															"description": "(Required) "
+														},
+														{
+															"key": "name",
+															"value": "<string>",
+															"description": "(Required) "
+														},
+														{
+															"key": "password",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"url": {
+													"raw": "//api/user/create/",
+													"path": [
+														"",
+														"api",
+														"user",
+														"create",
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+										},
+										{
+											"name": "user create create",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "name",
+															"value": "Post1",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "Pass1234",
+															"type": "text"
+														},
+														{
+															"key": "email",
+															"value": "post@test.com",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/user/create/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"create",
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Sun, 09 Jun 2024 13:05:18 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.10.14"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept, Cookie"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "40"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"email\": \"post@test.com\",\n    \"name\": \"Post1\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "profile-settings",
+							"item": [
+								{
+									"name": "user profile settings retrieve",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "00920dd96e6289d5a8b47287d7d0302658b06c9a",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json,",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": " Token eaa3238f73d77ff5fe94dfdd3070594691cf3712",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user/profile-settings/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"profile-settings",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/profile-settings/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"profile-settings",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "user profile settings update",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "Authorization",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "<email>",
+													"description": "(Required) "
+												},
+												{
+													"key": "name",
+													"value": "<string>",
+													"description": "(Required) "
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user/profile-settings/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"profile-settings",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "email",
+															"value": "<email>",
+															"description": "(Required) "
+														},
+														{
+															"key": "name",
+															"value": "<string>",
+															"description": "(Required) "
+														},
+														{
+															"key": "password",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/user/profile-settings/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"profile-settings",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "user profile settings partial update",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "Authorization",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "<email>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "name",
+													"value": "<string>"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user/profile-settings/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"profile-settings",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "email",
+															"value": "<email>"
+														},
+														{
+															"key": "password",
+															"value": "<string>"
+														},
+														{
+															"key": "name",
+															"value": "<string>"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/user/profile-settings/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"profile-settings",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "token",
+							"item": [
+								{
+									"name": "user token create",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "sessionid",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "<email>",
+													"description": "(Required) "
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user/token/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"token",
+												""
+											]
+										},
+										"description": "Create a new auth token for user."
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "sessionid",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "email",
+															"value": "<email>",
+															"description": "(Required) "
+														},
+														{
+															"key": "password",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/user/token/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"token",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}"
+										},
+										{
+											"name": "user token create",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "email",
+															"value": "post@test.com",
+															"description": "(Required) "
+														},
+														{
+															"key": "password",
+															"value": "Pass1234",
+															"description": "(Required) "
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/user/token/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"token",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Sun, 09 Jun 2024 13:08:04 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.10.14"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept, Cookie"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "52"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"token\": \"00920dd96e6289d5a8b47287d7d0302658b06c9a\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "Pass1234",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "post@test.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000"
+		}
+	]
+}

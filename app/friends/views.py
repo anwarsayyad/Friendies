@@ -67,7 +67,7 @@ class FriendsViewSet(
     queryset = Friends.objects.all()
     serializer_class = FreindsSerialiser
     permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
 
     @action(detail=False, methods=['post'], url_name='send', url_path='send')
     def send(self, request):
@@ -75,6 +75,7 @@ class FriendsViewSet(
         self.serializer_class = FriendsSerializersReq
         req_from = request.user
         to_data = request.data.get('requests_to')
+        print(request.data)
         to = models.User.objects.get(email=to_data['email'])
         if req_from == to:
             return Response(
@@ -183,7 +184,7 @@ class UserSerachViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerilaizersForFriends
     pagination_class = UserPagation
     permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
 
     def get_queryset(self):
         keyword = self.request.query_params.get('search', '')
