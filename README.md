@@ -4,7 +4,7 @@ Friendies is a Django-based API for managing user friendships. It includes featu
 
 ## Features
 
-<!--- **User Authentication**: Token-based authentication to secure the API. -->
+- **User Authentication**: Basic authentication using username(email) and password to secure the API.
 - **Search Users**:
   - Search by email or name.
   - If the search keyword matches the exact email, return the user associated with the email.
